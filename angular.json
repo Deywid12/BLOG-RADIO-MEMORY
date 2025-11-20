@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "blog-simples": {
+    "BLOG-RM": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "blog-simples:build:production"
+              "buildTarget": "BLOG-RM:build:production"
             },
             "development": {
-              "buildTarget": "blog-simples:build:development"
+              "buildTarget": "BLOG-RM:build:development"
             }
           },
           "defaultConfiguration": "development"
