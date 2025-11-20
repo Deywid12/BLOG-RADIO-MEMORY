@@ -1,0 +1,57 @@
+<div class="container">
+  <header class="header">
+    <h1>📰 Notícias Rádio memory</h1>
+    <div class="filters">
+      <input type="text" [(ngModel)]="searchTerm" (input)="applyFilters()" placeholder="Buscar..." class="search-input" />
+      <select [(ngModel)]="selectedCategoria" (change)="applyFilters()" class="select-input">
+        <option value="">Todas as categorias</option>
+        <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+  </header>
+
+  <div *ngIf="loading" class="loading">Carregando...</div> <!-- indicador de carregamento -->
+
+  <div *ngIf="!loading && displayedCards.length > 0" class="cards-grid"> <!-- exibição dos cards -->
+    <article *ngFor="let card of displayedCards" class="card" (click)="viewDetail(card)">
+      <div class="card-header">-->
+        <img *ngIf="card.imgUrl" [src]="card.imgUrl" [alt]="card.titulo" /> <!-- imagem do card -->
+        <span *ngIf="isFixado(card)" class="badge">📌 Fixado</span>
+      </div>
+      <div class="card-body"> <!-- corpo do card -->
+        <h3>{{ card.titulo }}</h3>
+        <p class="subtitle">{{ card.subtitulo }}</p>
+        <div class="card-meta">
+          <span>📅 {{ formatDate(card.data) }}</span>
+          <span>🏷️ {{ card.categoria }}</span>
+          <span>✍️ {{ card.autor }}</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div *ngIf="!loading && displayedCards.length === 0" class="no-results">Nenhuma notícia encontrada</div> <!--Caso nenhum Card seja encontrado-->
+
+  <div *ngIf="!loading && hasMore()" class="load-more">
+    <button (click)="loadMore()">Carregar Mais</button> <!-- botão para carregar mais cards -->
+  </div>
+</div>
+
+<div *ngIf="selectedCard" class="modal" (click)="closeDetail()"> <!-- modal de detalhes do card -->
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeDetail()">✕</button>
+    <img *ngIf="selectedCard.imgUrl" [src]="selectedCard.imgUrl" [alt]="selectedCard.titulo" class="detail-image" />
+    <h2>{{ selectedCard.titulo }}</h2>
+    <p class="detail-subtitle">{{ selectedCard.subtitulo }}</p>
+    <div class="detail-meta">
+      <span>📅 {{ formatDate(selectedCard.data) }}</span>
+      <span>🏷️ {{ selectedCard.categoria }}</span>
+      <span>✍️ {{ selectedCard.autor }}</span>
+    </div>
+    <div *ngIf="selectedCard.videoUrl" class="video-container"> <!-- container de vídeo -->
+      <iframe [src]="selectedCard.videoUrl | safe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="detail-corpo" [innerHTML]="sanitizeHtml(selectedCard.corpo)"></div>
+    <a [href]="selectedCard.urlPost" target="_blank" class="read-link">Ler no site 🔗</a> <!--Link para ler os cards externamente-->
+  </div>
+</div>
