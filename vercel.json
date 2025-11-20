@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/BLOG-RM/index.html" }
-  ]
-}
