@@ -14,7 +14,7 @@
 
   <div *ngIf="!loading && displayedCards.length > 0" class="cards-grid"> <!-- exibição dos cards -->
     <article *ngFor="let card of displayedCards" class="card" (click)="viewDetail(card)">
-      <div class="card-header">-->
+      <div class="card-header">
         <img *ngIf="card.imgUrl" [src]="card.imgUrl" [alt]="card.titulo" /> <!-- imagem do card -->
         <span *ngIf="isFixado(card)" class="badge">📌 Fixado</span>
       </div>
