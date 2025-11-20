@@ -74,6 +74,8 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
+            "outputPath": "dist/BLOG-RM",
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
