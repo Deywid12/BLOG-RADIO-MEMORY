@@ -63,26 +63,21 @@ Permite que URLs do YouTube sejam carregadas no iframe sem bloqueios de seguran�
 - Efeitos hover
 - Modal overlay
 
-## Configuração da API
 
-Edite `src/environment.ts` para alterar o token:
+## Configuração do Token da API
 
+Para rodar este projeto, é necessário fornecer um token de API. Por motivos de segurança, o token não é incluído no repositório.
+
+1. Criar o arquivo .env
+
+Copie o arquivo de exemplo:
 ```typescript
-export const environment = {
-  apiUrl: 'https://sua-api.com/endpoint',
-  apiToken: 'seu-token-aqui'
-};
+cp .env.example .env
 ```
-
-## Build
-
-```bash
-npm run build
+2. Abra o .env e adicione seu token:
+```typescript
+NG_APP_TOKEN=
+NG_APP_API_URL=
 ```
-
-Arquivos compilados em `dist/blog-simples/`
-
----
-
 
 
