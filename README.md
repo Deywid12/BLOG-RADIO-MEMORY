@@ -63,6 +63,19 @@ Permite que URLs do YouTube sejam carregadas no iframe sem bloqueios de seguran�
 - Efeitos hover
 - Modal overlay
 
+## 6. **Sanitização (Segurança)**
+- O projeto implementa duas camadas de sanitização para garantir a segurança e prevenir ataques de Cross-Site Scripting (XSS), conforme implementado nos arquivos src/app/app.ts e src/app/safe.pipe.ts.
+- Sanitização de Conteúdo HTML (DOMPurify)
+- O pacote dompurify é utilizado no componente principal (src/app/app.ts) para limpar o conteúdo HTML recebido da API antes de ser renderizado.
+- A função sanitizeHtml(html: string) usa DOMPurify.sanitize(html) para remover scripts e tags maliciosas, garantindo que apenas HTML seguro seja exibido.
+- wSanitização de URLs (Angular DomSanitizer)
+- O SafePipe (src/app/safe.pipe.ts) utiliza o DomSanitizer do Angular para marcar URLs de recursos (como vídeos incorporados) como seguras.
+- O método bypassSecurityTrustResourceUrl() é usado especificamente para URLs de recursos, permitindo que sejam carregadas sem que o Angular bloqueie por motivos de segurança.
+
+## 7. **Roteamento**
+- O projeto utiliza um roteamento simples baseado em componentes do Angular.
+- Navegação de Detalhes: A exibição de detalhes de um card é gerenciada pelo estado do componente App (selectedCard). Ao clicar em um card, o estado é atualizado e o template (app.html) exibe a seção de detalhes.
+- Filtros e Busca: A filtragem e busca de cards são realizadas no lado do cliente dentro do componente App, manipulando os arrays cards, filteredCards e displayedCards.
 
 ## Configuração do Token da API
 
